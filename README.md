@@ -10,7 +10,7 @@ You can set the following properties :
 - titleColor      - The color (foreground) fors title, default is black
 - fontSize        - The font size for title, default is 14.0
 - backgroundColor - The background color for title, default is white
-- textAlign       - The alignment for text. i.e. Lef, Center or Right
+- textAlign       - The alignment for text. i.e. left, center or right
 
 See the screenshot
 
