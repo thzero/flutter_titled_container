@@ -10,9 +10,13 @@ class TitledContainer extends SingleChildRenderObjectWidget {
     titleColor,
     required this.title,
     textAlign,
+    fontFamily,
     fontSize,
+    fontWeight,
     backgroundColor,
-  })  : fontSize = fontSize ?? 14.0,
+  })  : fontFamily = fontFamily ?? null,
+        fontSize = fontSize ?? 14.0,
+        fontWeight = fontWeight ?? FontWeight.normal,
         titleColor = titleColor ?? const Color.fromRGBO(0, 0, 0, 1.0),
         textAlign = textAlign ?? TextAlignTitledContainer.left,
         backgroundColor = backgroundColor ?? const Color.fromRGBO(255, 255, 255, 1.0),
@@ -22,14 +26,18 @@ class TitledContainer extends SingleChildRenderObjectWidget {
   final Color backgroundColor;
   final String title;
   final TextAlignTitledContainer textAlign;
+  final String? fontFamily;
   final double fontSize;
+  final FontWeight fontWeight;
 
   @override
   RenderObject createRenderObject(BuildContext context) {
     return RenderTitledContainer(
       titleColor: titleColor,
       title: title,
+      fontFamily: fontFamily,
       fontSize: fontSize,
+      fontWeight: fontWeight,
       backgroundColor: backgroundColor,
       textAlign: textAlign,
     );
@@ -40,7 +48,9 @@ class TitledContainer extends SingleChildRenderObjectWidget {
     renderObject.titleColor = titleColor;
     renderObject.backgroundColor = backgroundColor;
     renderObject.title = title;
+    renderObject.fontFamily = fontFamily;
     renderObject.fontSize = fontSize;
+    renderObject.fontWeight = fontWeight;
     renderObject.textAlign = textAlign;
   }
 }
@@ -49,14 +59,18 @@ class RenderTitledContainer extends RenderBox with RenderObjectWithChildMixin<Re
   RenderTitledContainer({
     required Color titleColor,
     required String title,
+    required String? fontFamily,
     required double fontSize,
+    required FontWeight fontWeight,
     required Color backgroundColor,
     required TextAlignTitledContainer textAlign,
   })  : _titleColor = titleColor,
         _title = title,
         _textAlign = textAlign,
         _backgroundColor = backgroundColor,
-        _fontSize = fontSize;
+        _fontFamily = fontFamily,
+        _fontSize = fontSize,
+        _fontWeight = fontWeight;
 
   Color get titleColor => _titleColor;
   Color _titleColor;
@@ -90,11 +104,27 @@ class RenderTitledContainer extends RenderBox with RenderObjectWithChildMixin<Re
     markNeedsPaint();
   }
 
+  String? get fontFamily => _fontFamily;
+  String? _fontFamily;
+  set fontFamily(String? value) {
+    if (_fontFamily == value) return;
+    _fontFamily = value;
+    markNeedsPaint();
+  }
+
   double get fontSize => _fontSize;
   double _fontSize;
   set fontSize(double value) {
     if (_fontSize == value) return;
     _fontSize = value;
+    markNeedsPaint();
+  }
+
+  FontWeight get fontWeight => _fontWeight;
+  FontWeight _fontWeight;
+  set fontWeight(FontWeight value) {
+    if (_fontWeight == value) return;
+    _fontWeight = value;
     markNeedsPaint();
   }
 
@@ -120,7 +150,9 @@ class RenderTitledContainer extends RenderBox with RenderObjectWithChildMixin<Re
         text: ' $title ',
         style: TextStyle(
           color: titleColor,
+          fontFamily: fontFamily,
           fontSize: fontSize,
+          fontWeight: fontWeight,
           height: 1.0,
           backgroundColor: backgroundColor,
         ),
