@@ -1,8 +1,7 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 
-enum TextAlignTitledContainer { Left, Center, Right }
+enum TextAlignTitledContainer { left, center, right }
 
 class TitledContainer extends SingleChildRenderObjectWidget {
   const TitledContainer({
@@ -15,7 +14,7 @@ class TitledContainer extends SingleChildRenderObjectWidget {
     backgroundColor,
   })  : fontSize = fontSize ?? 14.0,
         titleColor = titleColor ?? const Color.fromRGBO(0, 0, 0, 1.0),
-        textAlign = textAlign ?? TextAlignTitledContainer.Left,
+        textAlign = textAlign ?? TextAlignTitledContainer.left,
         backgroundColor = backgroundColor ?? const Color.fromRGBO(255, 255, 255, 1.0),
         super(key: key, child: child);
 
@@ -38,11 +37,11 @@ class TitledContainer extends SingleChildRenderObjectWidget {
 
   @override
   void updateRenderObject(BuildContext context, RenderTitledContainer renderObject) {
-    renderObject..titleColor = titleColor;
-    renderObject..backgroundColor = backgroundColor;
-    renderObject..title = title;
-    renderObject..fontSize = fontSize;
-    renderObject..textAlign = textAlign;
+    renderObject.titleColor = titleColor;
+    renderObject.backgroundColor = backgroundColor;
+    renderObject.title = title;
+    renderObject.fontSize = fontSize;
+    renderObject.textAlign = textAlign;
   }
 }
 
@@ -53,7 +52,7 @@ class RenderTitledContainer extends RenderBox with RenderObjectWithChildMixin<Re
     required double fontSize,
     required Color backgroundColor,
     required TextAlignTitledContainer textAlign,
-  })   : _titleColor = titleColor,
+  })  : _titleColor = titleColor,
         _title = title,
         _textAlign = textAlign,
         _backgroundColor = backgroundColor,
@@ -139,10 +138,10 @@ class RenderTitledContainer extends RenderBox with RenderObjectWithChildMixin<Re
       txtPainter.layout(minWidth: 0, maxWidth: double.infinity);
       double xPos = 10.0;
       switch (textAlign) {
-        case TextAlignTitledContainer.Center:
+        case TextAlignTitledContainer.center:
           xPos = (size.width - txtPainter.size.width) / 2.0;
           break;
-        case TextAlignTitledContainer.Right:
+        case TextAlignTitledContainer.right:
           xPos = (size.width - txtPainter.size.width - 10);
           break;
         default:
@@ -155,6 +154,7 @@ class RenderTitledContainer extends RenderBox with RenderObjectWithChildMixin<Re
     }
   }
 
+  @override
   @protected
   bool get alwaysNeedsCompositing => true;
 }

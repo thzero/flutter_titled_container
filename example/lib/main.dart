@@ -33,7 +33,7 @@ class _MyHomePageState extends State<MyHomePage> {
         child: TitledContainer(
           titleColor: Colors.blue,
           title: 'Center Title',
-          textAlign: TextAlignTitledContainer.Left,
+          textAlign: TextAlignTitledContainer.left,
           fontSize: 14.0,
           backgroundColor: Colors.white,
           child: Container(
